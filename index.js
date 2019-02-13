@@ -26,11 +26,13 @@ function destroy(id) {
   })
 }
 
-export function eraseAllTweetsBy(screenName) {
-  tweetsBy(screenName).then((tweets) => {
+export async function eraseAllTweetsBy(screenName) {
+  return tweetsBy(screenName)
+  .then((tweets) => {
     const deletionOps = tweets.map((t) => destroy(t.id_str))
     // uncommenting this line will erase your ENTIRE timeline: /* return Promise.all(deletionOps) */
-  }).catch((e) => {
+  })
+  .catch((e) => {
     console.log('caught error during mass deletion of entire timeline', e)
   })
 }
