@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./src/index.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "twitter-cleaner": "./cli.js"
+    "twitter-cleaner": "./build/cli.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^11.9.4",
+    "@types/twitter": "^1.7.0",
     "arg-parser": "^1.2.0",
-    "twitter": "^1.7.1"
+    "tslint": "^5.12.1",
+    "twitter": "^1.7.1",
+    "typescript": "^3.4.0-dev.20190216"
+  },
+  "devDependencies": {
+    "tslint-config-airbnb": "^5.11.1"
   }
 }

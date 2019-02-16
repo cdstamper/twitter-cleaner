@@ -1,5 +1,5 @@
 # twitter-cleaner
-Simple command line utility for deleting old tweets
+Simple command line utility for deleting old tweets, written in typescript and compiled to node/es6. Twitter Developer key required for API access, sign up for free at https://developer.twitter.com/.
 
 ***NOTE: Currently twitter-cleaner deletes all tweets that it finds. Do NOT run this tool unless you want your entire timeline deleted.*** 
 
