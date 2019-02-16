@@ -6,6 +6,7 @@ ideal usage would be a command line tool which accepts date ranges as parameters
 
 ## USAGE
 
+
 ## TODO
 – Pagination (API is limited to 3.2k max tweets)
 - Query by date range
