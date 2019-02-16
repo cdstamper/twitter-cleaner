@@ -34,9 +34,8 @@ function tweetsBy(screenName) {
 }
 function destroy(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        /* TODO: change to statuses/destroy */
         try {
-            const t = yield client.get('statuses/show', { id, trim_user: true });
+            const t = yield client.get('statuses/destroy', { id, trim_user: true });
             console.log('t:', t, t);
         }
         catch (e) {
