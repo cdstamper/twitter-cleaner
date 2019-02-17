@@ -11,6 +11,7 @@ args.add({
     desc: 'username to clean',
     switches: ['-u', '--username'],
     required: true,
+    value: 'string',
 });
 args.add({
     name: 'consumer-key',
@@ -40,6 +41,11 @@ args.add({
     required: true,
     value: 'file',
 });
+args.add({
+    name: 'should-delete',
+    desc: 'by default tweet-cleaner only GETS tweets',
+    switches: ['-d', '--destructive'],
+});
 // USAGE: twitter-cleaner --consumer-key "A" --consumer-secret "B" --access-token "C" --access-token-secret "D" -u myname
 if (args.parse()) {
     process.env.TWITTER_CONSUMER_KEY = args.params['consumer-key'];
@@ -48,5 +54,6 @@ if (args.parse()) {
     process.env.TWITTER_ACCESS_TOKEN_SECRET = args.params['access-token-secret'];
     // since we're injecting config via env, we need to wait to import:
     const main = require('./index');
-    main.eraseAllTweetsBy(args.params['username']);
+    console.log('got user', args.params['username']);
+    main.eraseAllTweetsBy(args.params['username'], args.params['should-delete'] || false);
 }

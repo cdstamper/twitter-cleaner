@@ -36,18 +36,29 @@ function destroy(id) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const t = yield client.get('statuses/destroy', { id, trim_user: true });
-            console.log('t:', t, t);
+            console.log('deleted:', t.created_at, `https://twitter.com/statuses/${t.id}/`, t.text);
         }
         catch (e) {
             console.log('failed to delete tweet:', id, e);
         }
     });
 }
-function eraseAllTweetsBy(screenName) {
+function get(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const t = yield client.get('statuses/show', { id, trim_user: true });
+            console.log('got:', t.created_at, `https://twitter.com/statuses/${t.id_str}/`, t.text);
+        }
+        catch (e) {
+            console.log('failed to get tweet:', id, e);
+        }
+    });
+}
+function eraseAllTweetsBy(screenName, shouldDelete = false) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const tweets = yield tweetsBy(screenName);
-            const deletionOps = tweets.map((t) => destroy(t.id_str));
+            const deletionOps = tweets.map((t) => (shouldDelete ? destroy : get)(t.id_str));
             return Promise.all(deletionOps);
         }
         catch (e) {

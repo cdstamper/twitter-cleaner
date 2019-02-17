@@ -1,5 +1,5 @@
 # twitter-cleaner
-Simple command line utility for deleting old tweets, written in typescript and compiled to node/es6. Twitter Developer key required for API access, sign up for free at https://developer.twitter.com/.
+Simple command line utility for deleting old tweets. Twitter Developer key required for API access, sign up for free at https://developer.twitter.com/ (would be trivial to add account-level auth but the rate limits are not as generous)
 
 ***NOTE: Currently twitter-cleaner deletes all tweets that it finds. Do NOT run this tool unless you want your entire timeline deleted.*** 
 
@@ -11,13 +11,12 @@ FIRST navigate to `https://developer.twitter.com/` and create a new API key – 
 
 `npm install -g twitter-cleaner`
 
-`~$ twitter-cleaner --consumer-key "key" --consumer-secret "secret" --access-token "token" --access-token-secret "secret" -u my_username_here`
+`~$ twitter-cleaner --consumer-key "key" --consumer-secret "secret" --access-token "token" --access-token-secret "secret" -u "my_username_here"`
 
 ## KNOWN ISSUES / TODO
 
 - Pagination (API is limited to 3.2k max tweets)
 - Query by date range
-- CLI support w/ documentation
 
 ## CONTRIBUTIONS
 Pull requests will be reviewed quickly 😀

@@ -22,16 +22,25 @@ async function tweetsBy(screenName: string) {
 async function destroy(id: string) {
   try {
     const t = await client.get('statuses/destroy', { id, trim_user: true });
-    console.log('t:', t, t);
+    console.log('deleted:', t.created_at, `https://twitter.com/statuses/${t.id}/`, t.text);
   } catch (e) {
     console.log('failed to delete tweet:', id, e);
   }
 }
 
-export async function eraseAllTweetsBy(screenName: string) {
+async function get(id: string) {
+  try {
+    const t = await client.get('statuses/show', { id, trim_user: true });
+    console.log('got:', t.created_at, `https://twitter.com/statuses/${t.id_str}/`, t.text);
+  } catch (e) {
+    console.log('failed to get tweet:', id, e);
+  }
+}
+
+export async function eraseAllTweetsBy(screenName: string, shouldDelete: boolean = false) {
   try {
     const tweets = await tweetsBy(screenName);
-    const deletionOps = tweets!.map((t: any) => destroy(t.id_str));
+    const deletionOps = tweets!.map((t: any) => (shouldDelete ? destroy : get)(t.id_str));
     return Promise.all(deletionOps);
   } catch (e) {
     console.log('caught error during mass deletion of entire timeline', e);

@@ -8,6 +8,7 @@ args.add({
   desc: 'username to clean',
   switches: ['-u', '--username'],
   required: true,
+  value: 'string',
 });
 
 args.add({
@@ -41,6 +42,12 @@ args.add({
   value: 'file',
 });
 
+args.add({
+  name: 'should-delete',
+  desc: 'by default tweet-cleaner only GETS tweets',
+  switches: ['-d', '--destructive'],
+});
+
 // USAGE: twitter-cleaner --consumer-key "A" --consumer-secret "B" --access-token "C" --access-token-secret "D" -u myname
 if (args.parse()) {
 
@@ -51,5 +58,6 @@ if (args.parse()) {
 
   // since we're injecting config via env, we need to wait to import:
   const main = require('./index');
-  main.eraseAllTweetsBy(args.params['username']);
+  console.log('got user', args.params['username']);
+  main.eraseAllTweetsBy(args.params['username'], args.params['should-delete'] || false);
 }
