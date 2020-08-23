@@ -21,7 +21,7 @@ async function tweetsBy(screenName: string) {
 
 async function destroy(id: string) {
   try {
-    const t = await client.get('statuses/destroy', { id, trim_user: true });
+    const t = await client.post('statuses/destroy', { id, trim_user: true });
     console.log('deleted:', t.created_at, `https://twitter.com/statuses/${t.id}/`, t.text);
   } catch (e) {
     console.log('failed to delete tweet:', id, e);
